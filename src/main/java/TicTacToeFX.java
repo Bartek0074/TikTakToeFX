@@ -12,7 +12,7 @@ public class TicTacToeFX extends Application {
     @Override
     public void start(Stage primaryStage){
 
-        //Na razie tylko wersja 3x3
+        //Na razie tylko wersjaa 3x3
         //mozna zmienic na inne ale wtedy nie ma warunkow zwyciestwa dla innych rozmiarow planszy
         int sizeOfBoard = 3;
 
