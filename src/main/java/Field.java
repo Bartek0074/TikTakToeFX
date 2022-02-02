@@ -14,8 +14,7 @@ public class Field {
     }
     static public void updateButton(int playerId, Field field, int sizeOfBoard){
         field.setPlayerId(playerId);
-        //przypisanie buttonowi obrazka
-        //jeżeli playerId == 1 to kółko, a jak 2 to krzyzyk
+        //adding graphic to button
         if (playerId == 1){
             ImageView circle = new ImageView(new Image("circle.png"));
             circle.setFitHeight(600/sizeOfBoard - 30);
@@ -33,11 +32,6 @@ public class Field {
     }
 
 
-    public int getButtonIndex() { return buttonIndex; }
-
-    public void setButtonIndex(int buttonIndex) { this.buttonIndex = buttonIndex; }
-
-
     public int getPlayerId() { return playerId; }
 
     public void setPlayerId(int playerId) { this.playerId = playerId; }
@@ -45,6 +39,5 @@ public class Field {
 
     public Button getButton() { return button; }
 
-    public void setButton(Button button) { this.button = button; }
 
 }

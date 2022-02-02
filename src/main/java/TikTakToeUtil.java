@@ -4,7 +4,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -18,13 +17,13 @@ public class TikTakToeUtil {
 
     public static boolean isGameWon(Field[] field, PlayerId playerId, int sizeOfBoard, StackPane appliction){
 
-        //stworzenie obrazkow linii
+        //Building graphics
         ImageView horizontalLine = new ImageView(new Image("horizontal-line.png"));
         ImageView verticalLine = new ImageView(new Image("vertical-line.png"));
         ImageView diagonalLineUp = new ImageView(new Image("diagonal-line-up.png"));
         ImageView diagonalLineDown = new ImageView(new Image("diagonal-line-down.png"));
 
-        //zebranie do listy wszystkich obiektów field dla poszczególnego playerId
+        //collecting to the list occupiedFields all field objects which are captured by player
         ArrayList<Field> occupiedFields = new ArrayList<>();
         for (int i = 0; i < (sizeOfBoard*sizeOfBoard) ; i++){
             if (field[i].getPlayerId() == playerId.getPlayerId()){
@@ -32,15 +31,15 @@ public class TikTakToeUtil {
             }
         }
 
-        //wypisanie wszystkich przypadków zwyciestwa
+        //declaring every win cases
         ArrayList<Field> case1 = new ArrayList<>();
         case1.add(field[0]);
         case1.add(field[1]);
         case1.add(field[2]);
-        //sprawdzenie, czy warunek zwyciestwa jest prawdziwy
+        //checking if player won
         if (occupiedFields.containsAll(case1))
         {
-            //dodanie "lini zwyciestwa" i zwrócenie wartosci true
+            //adding graphics after game
             horizontalLine.setTranslateY(-200);
             appliction.getChildren().add(horizontalLine);
             return true;
@@ -119,11 +118,11 @@ public class TikTakToeUtil {
             return true;
         }
 
-        //zmienna licząca liczbę ruchów
+        //variable which counts number of moves
         int numberOfMoves = 0;
 
-        //sprawdzenie, czy istnieje jeszcze jakieś wolne pole
-        //jeżeli nie zwracana jest wartość true i gra jest remisowana
+        // draw check
+        // checking if exist any empty field
         for (int i = 0; i < Math.pow(sizeOfBoard,sizeOfBoard); i++){
             try {
                 if (field[i].getPlayerId() != 0) {
@@ -145,8 +144,7 @@ public class TikTakToeUtil {
     static void postGameInfo(int playerId, StackPane application, Field[] fields, int sizeOfBoard, Stage stage, GridPane board){
 
 
-        //Zadeklarowanie wszystkich potrzebnych labelek, przycisków, ktore zostana wyswietlone
-        //po zakonczeniu gry
+        // Building labels, buttons, which will be showed after game
         Font font1 = Font.font("Arial",FontWeight.BOLD, 60);
         Font font2 = Font.font("Arial",FontWeight.BOLD, 40);
 
@@ -155,7 +153,8 @@ public class TikTakToeUtil {
         circlesWonInfo.setFont(font1);
         circlesWonInfo.setTextFill(Color.WHITE);
         circlesWonInfo.setTranslateY(-100);
-        //szmery bajery
+
+        // some styles
         circlesWonInfo.setStyle("-fx-background-color: rgba(0, 0, 0, 0.03);" +
                                 "-fx-effect: dropshadow(gaussian, black, 40, 0, 0, 0);" +
                                 "-fx-background-insets: 10;");
@@ -181,7 +180,7 @@ public class TikTakToeUtil {
         Label playAgain = new Label(" Do you want to play again?");
         playAgain.setVisible(true);
         playAgain.setFont(font2);
-        playAgain.setTextFill(Color.WHITE);
+            playAgain.setTextFill(Color.WHITE);
         playAgain.setTranslateY(-40);
         playAgain.setStyle("-fx-background-color: rgba(0, 0, 0, 0.02);" +
                             "-fx-effect: dropshadow(gaussian, black, 40, 0, 0, 0);" +
@@ -207,8 +206,8 @@ public class TikTakToeUtil {
                      "-fx-effect: dropshadow(gaussian, black, 40, 0, 0, 0);" +
                      "-fx-background-insets: 10;");
 
-        //ustawienie akcji po wcisnięciu przycisku tak
-        //gra jest rozpoczynana od początku
+        // action after clicking button yes
+        // game starts again
         yes.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -229,17 +228,17 @@ public class TikTakToeUtil {
             }
         });
 
-        //ustawienie akcji po wcisnieciu buttona no
+        // action after clicking button no
+        // exit program
         no.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                //wyjscie z programu
                 stage.close();
             }
         });
 
 
-        //dodanie do roota kontrolek po skonczeniu gry
+        // adding to root buttons after game
         if (playerId == 1)
             application.getChildren().add(circlesWonInfo);
         else if (playerId == 2)
@@ -251,7 +250,7 @@ public class TikTakToeUtil {
         application.getChildren().add(yes);
         application.getChildren().add(no);
 
-        //wylaczenie wszystkich buttonow po zakonczeniu gry
+        //disabling every button from fields objects after game
         for (int i = 0; i < sizeOfBoard*sizeOfBoard; i++){
             fields[i].getButton().setDisable(true);
 
