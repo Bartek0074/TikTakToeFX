@@ -13,7 +13,7 @@ public class Board
         int buttonSize = 600 / sizeOfBoard;
 
         for (int i = 0 ; i < sizeOfBoardPowered ; i++){
-            fields[i] = new Field(i);
+            //fields[i] = new Field(i);
             fields[i].getButton().setPrefHeight(buttonSize);
             fields[i].getButton().setPrefWidth(buttonSize);
         }
